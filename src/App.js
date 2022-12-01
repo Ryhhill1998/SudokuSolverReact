@@ -28,8 +28,11 @@ const App = () => {
 
   return (
     <div className="app-container">
+      <h1>SUDOKU SOLVER</h1>
       <Grid board={board} />
-      <button onClick={printSolvedBoard}>Solve</button>
+      <button className="solve-button" onClick={printSolvedBoard}>
+        Solve
+      </button>
     </div>
   );
 };
