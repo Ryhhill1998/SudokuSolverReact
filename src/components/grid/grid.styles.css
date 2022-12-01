@@ -1,19 +1,15 @@
+.grid-container {
+  border: solid 2px black;
+}
+
 .row {
-  border-top: solid 1px black;
-  border-bottom: solid 1px black;
   display: flex;
 }
 
-.row-1 {
-  border-left: solid 1px black;
-}
-
-.row-3 {
-  border-right: solid 1px black;
-}
-
-.col {
+.square {
   border: solid 1px black;
-  height: 150px;
-  width: 150px;
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  line-height: 50px;
 }
