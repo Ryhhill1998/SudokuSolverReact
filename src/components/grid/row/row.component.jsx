@@ -7,7 +7,7 @@ const GridRow = ({ row, rowIndex }) => {
     >
       {row.map((element, i) => (
         <div key={i} className={`square ${i % 3 === 0 ? "left-border" : ""}`}>
-          {element}
+          {element ? element : ""}
         </div>
       ))}
     </div>
