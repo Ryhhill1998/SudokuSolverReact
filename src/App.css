@@ -15,9 +15,10 @@
   gap: 4em;
 }
 
-.solve-button {
+.button {
   width: 8rem;
   padding: 0.5em;
   text-transform: uppercase;
   font-size: large;
+  margin: 0.5em;
 }
