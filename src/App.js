@@ -22,9 +22,9 @@ const App = () => {
   const [board, setBoard] = useState(boardDefault);
 
   const showSolvedBoard = () => {
-    const solution = generateSolution();
+    const solution = generateSolution(board);
     if (!solution) console.log("No solution possible");
-    setBoard(solution);
+    setBoard([...solution]);
   };
 
   const updateBoard = ({ target }) => {
