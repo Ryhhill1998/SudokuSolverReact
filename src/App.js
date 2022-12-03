@@ -7,53 +7,47 @@ import generateSolution from "./hooks/sudokuSolver";
 import { useState } from "react";
 
 const boardDefault = [
-  [0, 6, 0, 0, 0, 0, 3, 0, 0],
-  [1, 0, 0, 0, 0, 0, 4, 2, 9],
-  [3, 0, 0, 9, 0, 8, 0, 0, 0],
-  [7, 0, 0, 0, 0, 4, 0, 0, 6],
-  [0, 0, 8, 0, 0, 0, 0, 0, 5],
-  [4, 0, 0, 1, 5, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 9, 0, 1, 0],
-  [6, 4, 0, 0, 0, 0, 2, 5, 0],
-  [0, 0, 0, 0, 7, 0, 9, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
-
-const board1 = [
-  [3, 4, 0, 0, 0, 0, 0, 0, 0],
-  [0, 5, 0, 0, 9, 0, 0, 0, 0],
-  [0, 0, 0, 3, 0, 0, 9, 2, 6],
-  [0, 0, 0, 1, 0, 2, 7, 3, 0],
-  [0, 3, 0, 0, 7, 9, 0, 0, 0],
-  [7, 0, 4, 0, 0, 0, 0, 1, 0],
-  [4, 2, 0, 9, 0, 0, 5, 6, 0],
-  [0, 0, 5, 0, 8, 7, 0, 0, 0],
-  [0, 0, 0, 0, 0, 4, 0, 9, 0],
-];
-
-const boards = [boardDefault, board1];
 
 const App = () => {
   const [board, setBoard] = useState(boardDefault);
 
-  const printSolvedBoard = () => {
+  const showSolvedBoard = () => {
     const solution = generateSolution();
+    if (!solution) console.log("No solution possible");
     setBoard(solution);
   };
 
-  const generateNewBoard = () => {
-    const randomIndex = Math.floor(Math.random() * 2);
-    setBoard(boards[randomIndex]);
+  const updateBoard = ({ target }) => {
+    let { value } = target;
+    value = value === "" ? 0 : Number.parseInt(value);
+
+    if (![0, 1, 2, 3, 4, 5, 6, 7, 8, 9].includes(value)) return;
+
+    const [row, col] = target.id.split("-");
+
+    setBoard(() => {
+      const updatedBoard = [...board];
+      updatedBoard[row][col] = value;
+      return updatedBoard;
+    });
   };
 
   return (
     <div className="app-container">
       <h1>SUDOKU SOLVER</h1>
-      <Grid board={board} />
+      <Grid board={board} inputHandler={updateBoard} />
       <div>
-        <button className="button generate-button" onClick={generateNewBoard}>
-          Generate
-        </button>
-        <button className="button solve-button" onClick={printSolvedBoard}>
+        <button className="button solve-button" onClick={showSolvedBoard}>
           Solve
         </button>
       </div>

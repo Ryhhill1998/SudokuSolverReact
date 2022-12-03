@@ -1,4 +1,4 @@
-const GridRow = ({ row, rowIndex }) => {
+const GridRow = ({ row, rowIndex, onChangeHandler }) => {
   return (
     <div
       className={`row ${
@@ -6,9 +6,15 @@ const GridRow = ({ row, rowIndex }) => {
       }`}
     >
       {row.map((element, i) => (
-        <div key={i} className={`square ${i % 3 === 0 ? "left-border" : ""}`}>
-          {element ? element : ""}
-        </div>
+        <input
+          key={i}
+          id={`${rowIndex}-${i}`}
+          className={`square${i % 3 === 0 ? " left-border" : ""}`}
+          type="text"
+          maxLength="1"
+          value={element ? element : ""}
+          onChange={onChangeHandler}
+        />
       ))}
     </div>
   );
